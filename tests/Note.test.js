@@ -1,4 +1,5 @@
 const Note = require("../lib/Note");
+const uuid = require("uuid");
 
 describe("Notes", () => {
   describe("Initialization", () => {
@@ -16,6 +17,14 @@ describe("Notes", () => {
       const cb = () => new Note();
 
       expect(cb).toThrow();
+    });
+
+    it("Note.id should generate a valid UUID", () => {
+      const title = "Test";
+      const text = "Test text";
+      const note = new Note("Test", "Test text");
+
+      expect(uuid.validate(note.id)).toBe(true);
     });
   });
 });
