@@ -1,5 +1,5 @@
 const Note = require("../lib/Note");
-const NotesList = require("../lib/NotesList");
+const NotesList = require("../lib/NoteList");
 const uuid = require("uuid");
 
 describe("Notes", () => {
