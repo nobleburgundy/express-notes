@@ -22,13 +22,13 @@ app.get("/notes", (req, res) => {
 app.get("/api/notes", (req, res) => {
   // api route to get all notes
   const noteList = new NoteList();
-  return res.json(noteList.getAllNotes());
+  res.json(noteList.getAllNotes());
 });
 
 app.get("/api/notes/:id", (req, res) => {
   const noteList = new NoteList();
   const id = req.params.id;
-  return res.json(noteList.getNoteById(id));
+  res.json(noteList.getNoteById(id));
 });
 
 app.post("/api/notes", (req, res) => {
@@ -42,13 +42,13 @@ app.delete("/api/notes/:id", (req, res) => {
   const noteList = new NoteList();
   const id = req.params.id;
   noteList.remove(id);
-  res.json();
+  res.json(req.body);
 });
 
 app.delete("/api/notes/clear", (req, res) => {
   const noteList = new NoteList();
   noteList.clear();
-  res.json();
+  res.json(req.body);
 });
 
 app.listen(PORT, () => {
