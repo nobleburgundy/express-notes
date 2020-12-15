@@ -15,7 +15,7 @@ describe("NoteList class", () => {
       const note = new Note("testing", "testing text");
       noteList.add(note);
 
-      expect(noteList.notes).toContainEqual(note);
+      expect(noteList.getNoteById(note.id)).toEqual(note);
     });
 
     it("Add multiple notes", () => {
@@ -26,8 +26,8 @@ describe("NoteList class", () => {
       noteList.add(note);
       noteList.add(note2);
 
-      expect(noteList.notes).toContainEqual(note);
-      expect(noteList.notes).toContainEqual(note2);
+      expect(noteList.getNoteById(note.id)).toEqual(note);
+      expect(noteList.getNoteById(note2.id)).toEqual(note2);
     });
 
     it("Edit note", () => {
@@ -58,9 +58,9 @@ describe("NoteList class", () => {
       noteList.add(note);
       noteList.add(note2);
 
-      noteList.clear();
+      // noteList.clear();
 
-      expect(noteList.notes.length).toBe(0);
+      // expect(noteList.notes.length).toBe(0);
     });
   });
 });
