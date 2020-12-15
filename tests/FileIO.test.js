@@ -1,12 +1,13 @@
-const FileIO = require("../lib/FileIO");
+const DBJsonIO = require("../lib/DBJsonIO");
 const fs = require("fs");
 const path = require("path");
+
 jest.mock("fs");
 
 describe("FileIO", () => {
   describe("read", () => {
     it("should call fs.readFileSync with the passed in 'file' argument", () => {
-      const fileIO = new FileIO();
+      const fileIO = new DBJsonIO();
       const file = path.resolve(path.join("./db", "db.json"));
       let data;
       const mockReturnData = JSON.stringify({ title: "Test", text: "Testing" });
@@ -21,7 +22,7 @@ describe("FileIO", () => {
 
   describe("write", () => {
     it("should call fs.writeFileSync with the passed in 'path' and 'data' arguments", () => {
-      const fileIO = new FileIO();
+      const fileIO = new DBJsonIO();
       const file = path.resolve(path.join("./db", "db.json"));
       const data = JSON.stringify({ title: "Test", text: "Testing" });
 
@@ -33,7 +34,7 @@ describe("FileIO", () => {
 
   describe("append", () => {
     it("should call fs.appendFileSync with the passed in 'file' and 'data' arguments", () => {
-      const fileIO = new FileIO();
+      const fileIO = new DBJsonIO();
       const file = path.resolve(path.join("./db", "db.json"));
       const data = JSON.stringify({ title: "Test", text: "Testing" });
 
