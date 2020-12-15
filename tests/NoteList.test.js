@@ -16,6 +16,8 @@ describe("NoteList class", () => {
       noteList.add(note);
 
       expect(noteList.notes[0]).toBe(note);
+      // clean up
+      noteList.remove(note.id);
     });
 
     it("Add multiple notes", () => {
@@ -28,12 +30,14 @@ describe("NoteList class", () => {
         new Note("test4", "test text 4"),
       ];
 
-      for (const note of newNoteArray) {
+      newNoteArray.forEach((note) => {
         noteList.add(note);
         expect(noteList.notes).toContainEqual(note);
-      }
+      });
 
       expect(noteList.notes.length).toBe(preAddLength + newNoteArray.length);
+      // clean up
+      newNoteArray.forEach((note) => noteList.remove(note.id));
     });
 
     it("Edit note", () => {
@@ -45,6 +49,8 @@ describe("NoteList class", () => {
       noteList.editNote(note.id, newText);
 
       expect(noteList.getAllNotes()).toContainEqual(note);
+      // clean up
+      noteList.remove(note.id);
     });
 
     it("Remove note", () => {
@@ -52,9 +58,33 @@ describe("NoteList class", () => {
       const note = new Note("test1", "test text 1");
 
       noteList.add(note);
-      noteList.remove(note);
+      noteList.remove(note.id);
 
       expect(noteList.notes).not.toContainEqual(note);
+    });
+
+    it("Should throw error if nothing provided to add()", () => {
+      const noteList = new NoteList();
+
+      const cb = () => noteList.add();
+
+      expect(cb).toThrow();
+    });
+
+    it("Should throw error if add request doesn't have 'title'", () => {
+      const noteList = new NoteList();
+
+      const cb = () => noteList.add({ title: "", text: "Test text" });
+
+      expect(cb).toThrowError("Request body has to include Note 'title' and Note 'text'");
+    });
+
+    it("Should throw error if add request doesn't have 'text'", () => {
+      const noteList = new NoteList();
+
+      const cb = () => noteList.add({ title: "Test", text: "" });
+
+      expect(cb).toThrowError("Request body has to include Note 'title' and Note 'text'");
     });
   });
 });
