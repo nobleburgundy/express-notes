@@ -4,7 +4,7 @@ const path = require("path");
 
 jest.mock("fs");
 
-describe("FileIO", () => {
+describe("DBJsonIO", () => {
   describe("read", () => {
     it("should call fs.readFileSync with the passed in 'file' argument", () => {
       const fileIO = new DBJsonIO();
