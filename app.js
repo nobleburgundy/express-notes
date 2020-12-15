@@ -24,6 +24,12 @@ app.get("/api/notes", (req, res) => {
   return res.json(noteList.getAllNotes());
 });
 
+app.get("/api/notes/:id", (req, res) => {
+  const noteList = new NoteList();
+  const id = req.params.id;
+  return res.json(noteList.getNoteById(id));
+});
+
 app.post("/api/notes", (req, res) => {
   const noteList = new NoteList();
   noteList.add(req.body);
